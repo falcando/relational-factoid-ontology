@@ -1,0 +1,90 @@
+@prefix rf: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#> .
+@prefix fpo: <https://github.com/johnBradley501/FPO/raw/master/fpo.owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# WORKING RECONSTRUCTION, not the lost original ontology.
+# Canonical project namespace uses the raw-file URL of the public GitHub repository.
+<https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl> a owl:Ontology ;
+    rdfs:label "Relational factoid extension of Bradley's FPO, working draft 0.1"@en ;
+    dcterms:creator "Hervin Fernández Aceves" ;
+    dcterms:created "2026-11-22"^^xsd:date ;
+    dcterms:description "A conservative OWL extension representing a source-grounded directed connection N between two actants A1 and A2, without asserting an unqualified historical relationship."@en ;
+    dcterms:source <https://github.com/johnBradley501/FPO> ,
+       <https://www.academia.edu/24429003/The_Uncharted_Networks_of_a_Chartered_Territory_Diplomatic_Evidence_and_Relational_Sociology_for_the_Norman_Kingdom_of_Sicily> ;
+    owl:versionInfo "0.1-working-reconstruction" .
+
+# Original public formula, verified from Fernández-Aceves's presentation:
+# A source S at location L and time T states a connection N
+# between actant 1 A1 and actant 2 A2.
+# In the model below L is a *locus in the source*, not a geographical place.
+# The original presentation does not disambiguate T. We provisionally map T
+# to date-of-source-assertion (fpo:hasDateAssertionMade), while reserving
+# rf:relationTime for the separately inferred time of the claimed relation.
+
+rf:RelationalFactoid a owl:Class ;
+    rdfs:subClassOf fpo:Factoid ;
+    rdfs:label "Relational factoid"@en ;
+    rdfs:comment "A documentary assertion interpreting a connection between historical actants. NOT an established relationship asserted directly between persons. Unlike FPO RelationshipFactoid, this broad class also permits transaction event factoids."@en .
+
+rf:BinaryRelationalFactoid a owl:Class ;
+    rdfs:subClassOf rf:RelationalFactoid ;
+    rdfs:label "Binary relational factoid"@en ;
+    rdfs:comment "A relational factoid with structurally distinguished A1 and A2 references. Additional witnesses or locations may still use fpo:hasReference; roles specify their participation."@en .
+
+rf:AttributionalFactoid a owl:Class ;
+    rdfs:subClassOf fpo:Factoid ;
+    rdfs:label "Attributional factoid"@en ;
+    rdfs:comment "A source-grounded claim of an attribute about an actant, corresponding to the attributional formulation in Fernández-Aceves's presentation. This first draft does not constrain attribute values."@en .
+
+rf:hasActant1Reference a owl:ObjectProperty ;
+    rdfs:subPropertyOf fpo:hasReference ;
+    rdfs:domain rf:BinaryRelationalFactoid ;
+    rdfs:range fpo:PersonReference ;
+    rdfs:label "has A1 person reference"@en ;
+    rdfs:comment "The source-occurrence reference to the first actant; A1's specific function is held separately in fpo:hasRole."@en .
+
+rf:hasActant2Reference a owl:ObjectProperty ;
+    rdfs:subPropertyOf fpo:hasReference ;
+    rdfs:domain rf:BinaryRelationalFactoid ;
+    rdfs:range fpo:PersonReference ;
+    rdfs:label "has A2 person reference"@en ;
+    rdfs:comment "The source-occurrence reference to the second actant. The ordered slots must not be presumed symmetric."@en .
+
+rf:hasAttributionSubjectReference a owl:ObjectProperty ;
+    rdfs:subPropertyOf fpo:hasReference ;
+    rdfs:domain rf:AttributionalFactoid ;
+    rdfs:range fpo:PersonReference ;
+    rdfs:label "has attributional subject reference"@en .
+
+rf:assertsConnectionType a owl:ObjectProperty ;
+    rdfs:domain rf:RelationalFactoid ;
+    rdfs:range skos:Concept ;
+    rdfs:label "asserts type of connection N"@en ;
+    rdfs:comment "A controlled historical relation category whose definition specifies the meaning and direction of A1 -> A2. It is a *type of source assertion*, not an asserted direct person-person RDF property."@en .
+
+rf:assertsAttributeType a owl:ObjectProperty ;
+    rdfs:domain rf:AttributionalFactoid ;
+    rdfs:range skos:Concept ;
+    rdfs:label "asserts attribute F"@en .
+
+rf:relationTime a owl:ObjectProperty ;
+    rdfs:domain rf:RelationalFactoid ;
+    rdfs:range fpo:DateRange ;
+    rdfs:label "claimed relation period (distinct from source date)"@en ;
+    rdfs:comment "The time for which a source asserts the relation, DISTINCT from when the documentary assertion was written (fpo:hasDateAssertionMade). For specialised state/event factoids, the FPO dateForAssertion/occurredOn properties may also be used appropriately."@en .
+
+rf:evidenceExcerpt a owl:DatatypeProperty ;
+    rdfs:domain fpo:Factoid ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "verbatim evidence excerpt"@en ;
+    rdfs:comment "An excerpt from the cited source, with original wording and language preserved. A transcription should be checked against its edition or manuscript."@en .
+
+rf:editorialInterpretation a owl:DatatypeProperty ;
+    rdfs:domain fpo:Factoid ;
+    rdfs:range rdfs:Literal ;
+    rdfs:label "editorial interpretation (not source wording)"@en .
