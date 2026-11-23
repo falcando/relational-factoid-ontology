@@ -2,7 +2,7 @@
 
 **Working reconstruction v0.1** | OWL/RDF (Turtle) | Source-grounded relational prosopography
 
-**Author and research concept:** Hervin Fernández Aceves. **Technical implementation:** reconstructed in November 2026 with AI assistance, from the author's documented conceptual model and John Bradley's Factoid Prosopography Ontology (FPO).
+**Author and research concept:** Hervin Fernández Aceves. **Technical implementation:**, from the author's documented conceptual model and John Bradley's Factoid Prosopography Ontology (FPO).
 
 > **Important provenance:** This repository is a **new reconstruction**, **not** a recovered copy of Fernández Aceves's lost TextMate ontology, and **not** a verified reconstruction of his 2022 Masaryk University implementation. No original file from the lost ontology is reproduced or claimed to have survived.
 
