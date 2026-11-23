@@ -1,0 +1,53 @@
+@prefix rf: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#> .
+@prefix demo: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/example-SYNTHETIC.ttl#> .
+@prefix fpo: <https://github.com/johnBradley501/FPO/raw/master/fpo.owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# FICTITIOUS TEST DATA. No evidential claims about actual medieval charters.
+# The non-existent "Charter X" and imaginary people must not be published as history.
+
+demo:charter-X a fpo:Source ;
+    fpo:hasSourceID "TEST-X" ;
+    fpo:hasSourceName "Invented charter for software tests only" .
+
+demo:citation-X-locus12 a fpo:SourceCitation ;
+    fpo:fromSource demo:charter-X ;
+    fpo:hasPlaceInSource "synthetic line 12" .
+
+demo:actor-A a fpo:Person ; fpo:hasDisplayName "Fictitious person A" .
+demo:actor-B a fpo:Person ; fpo:hasDisplayName "Fictitious person B" .
+
+demo:A1-ref a fpo:PersonReference ;
+    fpo:referencesPerson demo:actor-A ;
+    fpo:hasNameInSourceAs "A" ;
+    fpo:hasRole demo:role-child .
+
+demo:A2-ref a fpo:PersonReference ;
+    fpo:referencesPerson demo:actor-B ;
+    fpo:hasNameInSourceAs "B" ;
+    fpo:hasRole demo:role-parent .
+
+demo:role-child a fpo:Role ; fpo:hasRoleName "child" .
+demo:role-parent a fpo:Role ; fpo:hasRoleName "parent" .
+
+demo:child-of a skos:Concept ;
+    skos:prefLabel "A1 is a child of A2"@en ;
+    skos:definition "A directed documentary claim of descent; it does not entail verified parentage."@en .
+
+demo:source-date a fpo:DateRange ;
+    fpo:hasTextualDescription "c. 1200 (fictitious date)" .
+
+demo:claimed-relation-period a fpo:DateRange ;
+    fpo:hasTextualDescription "time of claimed kinship, unspecified (synthetic)" .
+
+demo:factoid-1 a rf:BinaryRelationalFactoid, fpo:RelationshipFactoid ;
+    rf:hasActant1Reference demo:A1-ref ;
+    rf:hasActant2Reference demo:A2-ref ;
+    rf:assertsConnectionType demo:child-of ;
+    fpo:sourcedFrom demo:citation-X-locus12 ;
+    fpo:hasDateAssertionMade demo:source-date ;
+    fpo:dateForAssertion demo:claimed-relation-period ;
+    rf:relationTime demo:claimed-relation-period ;
+    rf:editorialInterpretation "Invented example, for testing the semantics of A1/N/A2 only."@en .
