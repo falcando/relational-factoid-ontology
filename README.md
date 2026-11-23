@@ -1,8 +1,8 @@
 # Relational Factoid Ontology (RFO)
 
-**Working reconstruction v0.1** | OWL/RDF (Turtle) | Source-grounded relational prosopography
+**Working formalisation v0.1** | RDF/OWL | Source-grounded relational prosopography
 
-**Author and research concept:** Hervin Fernández Aceves. **Technical implementation:**, from the author's documented conceptual model and John Bradley's Factoid Prosopography Ontology (FPO).
+**Author and relational model:** Hervin Fernández Aceves. This repository provides an RDF/OWL formalisation of his published relational factoid model, extending John Bradley's Factoid Prosopography Ontology (FPO).
 
 ## Research question and formal model
 
@@ -25,13 +25,14 @@ A primary reference for the author's formulation is [the presentation](https://w
 
 | File | Purpose |
 | --- | --- |
-| `relational-factoid-ontology.ttl` | OWL/RDFS vocabulary for relational and attributional factoids |
+| `relational-factoid-ontology.rdf` | The relational factoid ontology in RDF/XML, including OWL definitions |
+| `relational-factoid-ontology.ttl` | The same RDF/OWL ontology in Turtle syntax |
 | `relational-factoid-shapes.ttl` | SHACL constraints for a binary, source-grounded record |
 | `example-SYNTHETIC.ttl` | **Fictitious** test assertion (no historical evidential claims) |
 | `query-relations.rq` | SPARQL query for source-aware relational factoids |
 | `test_prototype.py` | Offline Turtle parsing, structural and SPARQL smoke test |
 | `requirements.txt` | Python requirement for the smoke test |
-| `LICENSE` | CC BY-NC 4.0 licensing notice and official legal-code link |
+| `LICENSE` | Full text of the CC BY-NC 4.0 International licence |
 
 ## Model boundaries and outstanding decisions
 
@@ -64,14 +65,23 @@ This URI depends on the `main` branch and the repository remaining available. Be
 
 ## Credit, licence and reproducibility
 
-The conceptual relational extension is attributed to **Hervin Fernández Aceves**; Bradley's distinct original FPO is credited above. This implementation is reconstructed with AI assistance and should not be cited as an original 2022 source artefact.
+The relational factoid model was developed by **Hervin Fernández Aceves** and described in his publicly available academic work. This repository formalises that model in RDF/OWL, building on the distinct FPO developed by John Bradley. The files here are not copies of the original TextMate document prepared for the 2022 lecture.
 
-**Licence:** This newly authored reconstruction is made available under [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE) for the declaration and the official legal code. Bradley's original FPO independently declares CC BY-NC 4.0; this repository references but does not reproduce his ontology. Attribution to Bradley is required for reusing his original material, and the relational extension is credited to Hervin Fernández Aceves.
+**Licence:** This RDF/OWL formalisation is made available under [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE) for the declaration and the official legal code. Bradley's original FPO independently declares CC BY-NC 4.0; this repository references but does not reproduce his ontology. Attribution to Bradley is required for reusing his original material, and the relational extension is credited to Hervin Fernández Aceves.
 
 The repository is a versioned research prototype, not a peer-reviewed or historically validated dataset.
 
-## RDF serialisations and ontology editors
+## RDF, OWL and Turtle: what is the difference?
 
-The canonical ontology is [`relational-factoid-ontology.ttl`](relational-factoid-ontology.ttl), written in **Turtle**, which is an RDF serialisation. The same ontology is also available as [`relational-factoid-ontology.rdf`](relational-factoid-ontology.rdf), in **RDF/XML**, and [`relational-factoid-ontology.owl`](relational-factoid-ontology.owl), an RDF/XML file with the `.owl` extension for tools such as Protégé. These are alternate serialisations, **not three different ontologies**. The current ontology graph has **60 RDF triples**. The synthetic example and SHACL validation graph remain in Turtle (`.ttl`) for now.
+The distinction starts with RDF, or the *Resource Description Framework*. RDF represents information in a graph through explicit statements, each made of a subject, a predicate and an object. As explained in [*What can we learn from the Semantic Web to 'revamp' our Historical Research?*](https://www.epoch-magazine.com/post/what-can-we-learn-from-the-semantic-web-to-revamp-our-historical-research), these statements are called *semantic triples*. They allow us to connect data entities directly, rather than retrieve their connections only through the structure of a relational database.
 
-Use `relational-factoid-ontology.owl` when a file chooser expects an OWL extension. Bradley's FPO v1.0 is referenced by namespace, not bundled in this repository; loading its axioms separately is necessary for reasoning across the full combined model.
+Yet stating a connection is not quite the same as defining its meaning. Consider a medieval charter that records a kinship relationship between two persons. RDF can represent that documentary statement, but an ontology is needed to define what the relationship means, which classes of entities it connects, and how it relates to other concepts. RDF Schema (RDFS) provides basic classes, properties and hierarchies; the *Web Ontology Language* (OWL) extends these possibilities with a more formal vocabulary for describing a domain of knowledge. In this project, the ontology defines how a relational factoid is represented, without turning the source's assertion into an unquestioned historical fact.
+
+So, where does Turtle fit in? **Turtle** (*Terse RDF Triple Language*) and **RDF/XML** are simply two syntaxes for writing RDF. The former is usually more compact and readable; the latter expresses the same statements using XML. Both can represent OWL ontologies. The extensions `.ttl` and `.rdf` describe these serialisations, whereas `.owl` is a conventional file extension, not a different semantic language. Indeed, Bradley's original `fpo.owl` file is written in Turtle.
+
+This repository therefore provides **two equivalent serialisations of one ontology**, rather than three different ontologies:
+
+- [`relational-factoid-ontology.rdf`](relational-factoid-ontology.rdf) is the RDF/XML document, including the classes and properties defined using OWL.
+- [`relational-factoid-ontology.ttl`](relational-factoid-ontology.ttl) expresses the same 60 RDF triples in Turtle syntax, making the ontology more convenient to read and edit.
+
+The [synthetic example](example-SYNTHETIC.ttl) is a separate RDF graph illustrating how assertions can be recorded with this vocabulary; it is not a corpus of actual Sardinian charters. The [SHACL shapes](relational-factoid-shapes.ttl) serve a different purpose: validating the structure of records. Bradley's FPO is referenced, not reproduced here, and its axioms must be loaded separately when reasoning across both ontologies.
