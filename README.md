@@ -69,3 +69,9 @@ The conceptual relational extension is attributed to **Hervin Fernández Aceves*
 **Licence:** This newly authored reconstruction is made available under [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE) for the declaration and the official legal code. Bradley's original FPO independently declares CC BY-NC 4.0; this repository references but does not reproduce his ontology. Attribution to Bradley is required for reusing his original material, and the relational extension is credited to Hervin Fernández Aceves.
 
 The repository is a versioned research prototype, not a peer-reviewed or historically validated dataset.
+
+## RDF serialisations and ontology editors
+
+The canonical ontology is [`relational-factoid-ontology.ttl`](relational-factoid-ontology.ttl), written in **Turtle**, which is an RDF serialisation. The same ontology is also available as [`relational-factoid-ontology.rdf`](relational-factoid-ontology.rdf), in **RDF/XML**, and [`relational-factoid-ontology.owl`](relational-factoid-ontology.owl), an RDF/XML file with the `.owl` extension for tools such as Protégé. These are alternate serialisations, **not three different ontologies**. The current ontology graph has **60 RDF triples**. The synthetic example and SHACL validation graph remain in Turtle (`.ttl`) for now.
+
+Use `relational-factoid-ontology.owl` when a file chooser expects an OWL extension. Bradley's FPO v1.0 is referenced by namespace, not bundled in this repository; loading its axioms separately is necessary for reasoning across the full combined model.
