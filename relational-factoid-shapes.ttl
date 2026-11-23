@@ -1,0 +1,31 @@
+@prefix rf: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#> .
+@prefix v: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-shapes.ttl#> .
+@prefix fpo: <https://github.com/johnBradley501/FPO/raw/master/fpo.owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Validation is intentionally separate from OWL, because OWL's open-world
+# semantics do not treat absent properties as errors.
+v:BinaryRelationalFactoidShape a sh:NodeShape ;
+    sh:targetClass rf:BinaryRelationalFactoid ;
+    sh:property [ sh:path rf:hasActant1Reference ; sh:minCount 1 ; sh:maxCount 1 ; sh:node v:PersonReferenceShape ] ;
+    sh:property [ sh:path rf:hasActant2Reference ; sh:minCount 1 ; sh:maxCount 1 ; sh:node v:PersonReferenceShape ] ;
+    sh:property [ sh:path rf:assertsConnectionType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class skos:Concept ] ;
+    sh:property [ sh:path fpo:sourcedFrom ; sh:minCount 1 ; sh:maxCount 1 ; sh:node v:SourceCitationShape ] ;
+    sh:property [ sh:path rf:relationTime ; sh:maxCount 1 ; sh:class fpo:DateRange ] ;
+    sh:property [ sh:path fpo:hasDateAssertionMade ; sh:maxCount 1 ; sh:class fpo:DateRange ] ;
+    sh:sparql [
+       sh:message "The first and second actant references must be different nodes."@en ;
+       sh:select """SELECT $this WHERE {
+          $this <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#hasActant1Reference> ?ref .
+          $this <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#hasActant2Reference> ?ref .
+       }"""
+    ] .
+
+v:PersonReferenceShape a sh:NodeShape ;
+    sh:property [ sh:path fpo:referencesPerson ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fpo:Person ] ;
+    sh:property [ sh:path fpo:hasRole ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fpo:Role ] .
+
+v:SourceCitationShape a sh:NodeShape ;
+    sh:property [ sh:path fpo:fromSource ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fpo:Source ] ;
+    sh:property [ sh:path fpo:hasPlaceInSource ; sh:minCount 1 ; sh:maxCount 1 ] .
