@@ -4,7 +4,7 @@ from rdflib import Graph, Namespace, RDF, RDFS, OWL
 
 ROOT = Path(__file__).parent
 FPO = Namespace('https://github.com/johnBradley501/FPO/raw/master/fpo.owl#')
-RF = Namespace('https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#')
+RFPO = Namespace('https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#')
 DEMO = Namespace('https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/example-SYNTHETIC.ttl#')
 
 def load(name):
@@ -15,20 +15,20 @@ def load(name):
 ontology = load('relational-factoid-ontology.ttl')
 data = load('example-SYNTHETIC.ttl')
 shapes = load('relational-factoid-shapes.ttl')
-assert (RF.RelationalFactoid, RDFS.subClassOf, FPO.Factoid) in ontology
-assert (RF.hasActant1Reference, RDFS.subPropertyOf, FPO.hasReference) in ontology
-assert (RF.hasActant2Reference, RDFS.subPropertyOf, FPO.hasReference) in ontology
+assert (RFPO.RelationalFactoid, RDFS.subClassOf, FPO.Factoid) in ontology
+assert (RFPO.hasActant1Reference, RDFS.subPropertyOf, FPO.hasReference) in ontology
+assert (RFPO.hasActant2Reference, RDFS.subPropertyOf, FPO.hasReference) in ontology
 assert len(shapes) > 0
 
-for factoid in data.subjects(RDF.type, RF.BinaryRelationalFactoid):
+for factoid in data.subjects(RDF.type, RFPO.BinaryRelationalFactoid):
     def unique(subject, prop):
         values = list(data.objects(subject, prop))
         assert len(values) == 1, f'{subject}: expected one {prop}, got {values}'
         return values[0]
-    r1 = unique(factoid, RF.hasActant1Reference)
-    r2 = unique(factoid, RF.hasActant2Reference)
+    r1 = unique(factoid, RFPO.hasActant1Reference)
+    r2 = unique(factoid, RFPO.hasActant2Reference)
     assert r1 != r2
-    unique(factoid, RF.assertsConnectionType)
+    unique(factoid, RFPO.assertsConnectionType)
     citation = unique(factoid, FPO.sourcedFrom)
     unique(citation, FPO.fromSource)
     unique(citation, FPO.hasPlaceInSource)

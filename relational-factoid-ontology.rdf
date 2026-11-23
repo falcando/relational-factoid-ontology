@@ -12,13 +12,13 @@
     <rdfs:comment xml:lang="en">A controlled historical relation category whose definition specifies the meaning and direction of A1 -&gt; A2. It is a *type of source assertion*, not an asserted direct person-person RDF property.</rdfs:comment>
   </owl:ObjectProperty>
   <owl:Ontology rdf:about="https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl">
-    <rdfs:label xml:lang="en">Relational factoid extension of Bradley's FPO, working draft 0.1</rdfs:label>
+    <rdfs:label xml:lang="en">Relational Factoid Prosopography Ontology (RFPO), working draft 0.1</rdfs:label>
     <dcterms:creator>Hervin Fernández Aceves</dcterms:creator>
     <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-22</dcterms:created>
-    <dcterms:description xml:lang="en">A conservative OWL extension representing a source-grounded directed connection N between two actants A1 and A2, without asserting an unqualified historical relationship.</dcterms:description>
+    <dcterms:description xml:lang="en">An RDF/OWL extension of John Bradley's Factoid Prosopography Ontology (FPO) for source-grounded relational assertions in historical prosopography, distinguishing documentary evidence from established historical relationships.</dcterms:description>
     <dcterms:source rdf:resource="https://github.com/johnBradley501/FPO"/>
     <dcterms:source rdf:resource="https://www.academia.edu/24429003/The_Uncharted_Networks_of_a_Chartered_Territory_Diplomatic_Evidence_and_Relational_Sociology_for_the_Norman_Kingdom_of_Sicily"/>
-    <owl:versionInfo>0.1-working-reconstruction</owl:versionInfo>
+    <owl:versionInfo>0.1-working-formalisation</owl:versionInfo>
   </owl:Ontology>
   <owl:ObjectProperty rdf:about="https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#relationTime">
     <rdfs:domain rdf:resource="https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#RelationalFactoid"/>

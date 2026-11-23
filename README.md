@@ -1,8 +1,8 @@
-# Relational Factoid Ontology (RFO)
+# Relational Factoid Prosopography Ontology (RFPO)
 
-**Working formalisation v0.1** | RDF/OWL | Source-grounded relational prosopography
+**RFPO · Working formalisation v0.1** | RDF/OWL | Source-grounded relational prosopography
 
-**Author and relational model:** Hervin Fernández Aceves. This repository provides an RDF/OWL formalisation of his published relational factoid model, extending John Bradley's Factoid Prosopography Ontology (FPO).
+**Author and relational model:** Hervin Fernández Aceves. The **Relational Factoid Prosopography Ontology (RFPO)** formalises his published model of relational factoids in historical prosopography through RDF/OWL, extending John Bradley's Factoid Prosopography Ontology (FPO).
 
 ## Research question and formal model
 
@@ -18,8 +18,8 @@ A primary reference for the author's formulation is [the presentation](https://w
 
 - Base ontology: [John Bradley, FPO v1.0](https://github.com/johnBradley501/FPO), [source file](https://github.com/johnBradley501/FPO/blob/master/fpo.owl), whose own source includes a CC BY-NC 4.0 rights statement.
 - **Extension, not fork:** this repository references FPO classes and properties in its own namespace and **does not include a copy of Bradley's ontology**. Load FPO alongside this extension when running inference across their complete axioms.
-- `rf:RelationalFactoid` descends from `fpo:Factoid`, **not** `fpo:RelationshipFactoid`: the latter is a `StateOfAffairsFactoid` and cannot also represent a `Transaction` event without contradicting Bradley's event/state disjointness.
-- `rf:hasActant1Reference` and `rf:hasActant2Reference` refine `fpo:hasReference`. Each actant is encountered through a source-specific `fpo:PersonReference`, with a `fpo:Role` and original source name.
+- `rfpo:RelationalFactoid` descends from `fpo:Factoid`, **not** `fpo:RelationshipFactoid`: the latter is a `StateOfAffairsFactoid` and cannot also represent a `Transaction` event without contradicting Bradley's event/state disjointness.
+- `rfpo:hasActant1Reference` and `rfpo:hasActant2Reference` refine `fpo:hasReference`. Each actant is encountered through a source-specific `fpo:PersonReference`, with a `fpo:Role` and original source name.
 
 ## Repository contents
 
@@ -53,7 +53,9 @@ python test_prototype.py
 
 This is **not** a substitute for running an OWL reasoner with Bradley's FPO loaded or a proper SHACL validator against the shapes. The current test checks Turtle syntax, selected logical structure and SPARQL query results.
 
-## Namespace
+## Namespace and identifier stability
+
+The RFPO's public name and its short Turtle prefix (`rfpo:`) do not change the identities of classes and properties. The existing namespace is retained to avoid breaking published RDF references:
 
 The working project vocabulary uses:
 
@@ -61,11 +63,11 @@ The working project vocabulary uses:
 https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#
 ```
 
-This URI depends on the `main` branch and the repository remaining available. Before a formal stable release, evaluate a persistent namespace and archive a tagged version. Raw GitHub URLs do not by themselves guarantee persistent semantic-web publication or appropriate RDF content negotiation.
+The historical repository and file path in this namespace are technical identifiers, not the current academic name of the ontology. Renaming these URLs without a persistent redirect would create incompatible RDF identities. This URI depends on the `main` branch and the repository remaining available. Before a formal stable release, evaluate a persistent namespace and archive a tagged version. Raw GitHub URLs do not by themselves guarantee persistent semantic-web publication or appropriate RDF content negotiation.
 
 ## Credit, licence and reproducibility
 
-The relational factoid model was developed by **Hervin Fernández Aceves** and described in his publicly available academic work. This repository formalises that model in RDF/OWL, building on the distinct FPO developed by John Bradley. The files here are not copies of the original TextMate document prepared for the 2022 lecture.
+The relational factoid model was developed by **Hervin Fernández Aceves** and described in his publicly available academic work. **RFPO** is the name adopted for its RDF/OWL formalisation. This repository formalises that model in RDF/OWL, building on the distinct FPO developed by John Bradley. The files here are not copies of the original TextMate document prepared for the 2022 lecture.
 
 **Licence:** This RDF/OWL formalisation is made available under [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE) for the declaration and the official legal code. Bradley's original FPO independently declares CC BY-NC 4.0; this repository references but does not reproduce his ontology. Attribution to Bradley is required for reusing his original material, and the relational extension is credited to Hervin Fernández Aceves.
 

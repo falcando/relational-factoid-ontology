@@ -1,4 +1,4 @@
-@prefix rf: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#> .
+@prefix rfpo: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#> .
 @prefix demo: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/example-SYNTHETIC.ttl#> .
 @prefix fpo: <https://github.com/johnBradley501/FPO/raw/master/fpo.owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -42,12 +42,12 @@ demo:source-date a fpo:DateRange ;
 demo:claimed-relation-period a fpo:DateRange ;
     fpo:hasTextualDescription "time of claimed kinship, unspecified (synthetic)" .
 
-demo:factoid-1 a rf:BinaryRelationalFactoid, fpo:RelationshipFactoid ;
-    rf:hasActant1Reference demo:A1-ref ;
-    rf:hasActant2Reference demo:A2-ref ;
-    rf:assertsConnectionType demo:child-of ;
+demo:factoid-1 a rfpo:BinaryRelationalFactoid, fpo:RelationshipFactoid ;
+    rfpo:hasActant1Reference demo:A1-ref ;
+    rfpo:hasActant2Reference demo:A2-ref ;
+    rfpo:assertsConnectionType demo:child-of ;
     fpo:sourcedFrom demo:citation-X-locus12 ;
     fpo:hasDateAssertionMade demo:source-date ;
     fpo:dateForAssertion demo:claimed-relation-period ;
-    rf:relationTime demo:claimed-relation-period ;
-    rf:editorialInterpretation "Invented example, for testing the semantics of A1/N/A2 only."@en .
+    rfpo:relationTime demo:claimed-relation-period ;
+    rfpo:editorialInterpretation "Invented example, for testing the semantics of A1/N/A2 only."@en .
