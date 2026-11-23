@@ -4,8 +4,6 @@
 
 **Author and research concept:** Hervin Fernández Aceves. **Technical implementation:**, from the author's documented conceptual model and John Bradley's Factoid Prosopography Ontology (FPO).
 
-> **Important provenance:** This repository is a **new reconstruction**, **not** a recovered copy of Fernández Aceves's lost TextMate ontology, and **not** a verified reconstruction of his 2022 Masaryk University implementation. No original file from the lost ontology is reproduced or claimed to have survived.
-
 ## Research question and formal model
 
 In *The Uncharted Networks of a 'Chartered' Territory*, Fernández Aceves extended Bradley and Short's factoid formulation to distinguish **attributional** and **relational** factoids. The relational model can be paraphrased as:
