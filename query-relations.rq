@@ -1,0 +1,17 @@
+PREFIX rf: <https://raw.githubusercontent.com/falcando/relational-factoid-ontology/main/relational-factoid-ontology.ttl#>
+PREFIX fpo: <https://github.com/johnBradley501/FPO/raw/master/fpo.owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+# Produce a source-aware list of observed source assertions (not a verified SNA edge list).
+SELECT ?factoid ?actant1 ?actant2 ?relation ?source ?locus
+WHERE {
+    ?factoid a rf:BinaryRelationalFactoid ;
+      rf:hasActant1Reference/fpo:referencesPerson ?actant1 ;
+      rf:hasActant2Reference/fpo:referencesPerson ?actant2 ;
+      rf:assertsConnectionType ?relationConcept ;
+      fpo:sourcedFrom ?citation .
+    ?relationConcept skos:prefLabel ?relation .
+    ?citation fpo:fromSource ?source ;
+      fpo:hasPlaceInSource ?locus .
+}
+ORDER BY ?factoid
